@@ -1,10 +1,10 @@
 "use strict";
 
 // Selecting elements
-const score0El = document.getElementById("score--0");
-const score1El = document.getElementById("score--1");
-let current0El = document.getElementById("current--0");
-let current1El = document.getElementById("current--1");
+const score0El = document.getElementById("score--0"); // Player 1 total score
+const score1El = document.getElementById("score--1"); // Player 2 total score
+let current0El = document.getElementById("current--0"); // Player 1 current score
+let current1El = document.getElementById("current--1"); // Player 2 current score
 const diceEl = document.querySelector(".dice");
 const btnNew = document.querySelector(".btn--new");
 const btnRoll = document.querySelector(".btn--roll");
@@ -16,7 +16,7 @@ let currentScore = 0;
 // Storing total scores
 const scores = [0, 0];
 
-// Set active player
+// Set active player (Player 1 always first on New Game)
 let activePlayer = 0;
 
 // Starting conditions
@@ -41,6 +41,8 @@ btnRoll.addEventListener("click", function () {
       currentScore;
   } else {
     // Switch to next player
+    document.getElementById(`current--${activePlayer}`).textContent = 0;
+    currentScore = 0;
     activePlayer = activePlayer === 0 ? 1 : 0;
   }
 });
