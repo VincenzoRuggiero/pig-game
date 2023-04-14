@@ -21,6 +21,14 @@ const scores = [0, 0];
 // Set active player (Player 1 always first on New Game)
 let activePlayer = 0;
 
+const switchPlayer = function () {
+  document.getElementById(`current--${activePlayer}`).textContent = 0;
+  currentScore = 0;
+  activePlayer = activePlayer === 0 ? 1 : 0;
+  player0El.classList.toggle("player--active");
+  player1El.classList.toggle("player--active");
+};
+
 // Starting conditions
 score0El.textContent = 0;
 score1El.textContent = 0;
@@ -43,10 +51,28 @@ btnRoll.addEventListener("click", function () {
       currentScore;
   } else {
     // Switch to next player
-    document.getElementById(`current--${activePlayer}`).textContent = 0;
-    currentScore = 0;
-    activePlayer = activePlayer === 0 ? 1 : 0;
-    player0El.classList.toggle("player--active");
-    player1El.classList.toggle("player--active");
+    switchPlayer();
+  }
+});
+
+// Holding current points functionality
+btnHold.addEventListener("click", function () {
+  // Add current score to the active player
+  scores[activePlayer] += currentScore;
+  document.getElementById(`score--${activePlayer}`).textContent =
+    scores[activePlayer];
+
+  // Check if player's score is >= 100
+  if (scores[activePlayer] >= 100) {
+    // Finish the game
+    document
+      .querySelector(`.player--${activePlayer}`)
+      .classList.add("player--winner");
+    document
+      .querySelector(`.player--${activePlayer}`)
+      .classList.remove("player--active");
+  } else {
+    // Switch the next player
+    switchPlayer();
   }
 });
