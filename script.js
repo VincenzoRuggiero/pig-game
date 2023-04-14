@@ -102,4 +102,4 @@ btnHold.addEventListener("click", function () {
 });
 
 // 'New Game' button functionality
-btnNew.addEventListener("click", function (init) {});
+btnNew.addEventListener("click", init);
