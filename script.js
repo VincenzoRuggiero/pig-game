@@ -13,6 +13,12 @@ const btnHold = document.querySelector(".btn--hold");
 // Storing current score
 let currentScore = 0;
 
+// Storing total scores
+const scores = [0, 0];
+
+// Set active player
+let activePlayer = 0;
+
 // Starting conditions
 score0El.textContent = 0;
 score1El.textContent = 0;
@@ -31,9 +37,10 @@ btnRoll.addEventListener("click", function () {
   if (dice !== 1) {
     // Add the dice value to the score
     currentScore += dice;
-    current0El.textContent = currentScore; // Change later
-
-    // Switch to next player
+    document.getElementById(`current--${activePlayer}`).textContent =
+      currentScore;
   } else {
+    // Switch to next player
+    activePlayer = activePlayer === 0 ? 1 : 0;
   }
 });
